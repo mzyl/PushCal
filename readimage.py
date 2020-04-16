@@ -7,6 +7,8 @@ def pathToImage(path):
 	return cv2.imread(path)
 
 #Creates an edged image for easier OCR
+#Actually seems to work MUCH better without edged
+#Resizing is also a factor and produces different results
 def imgToEdged(image):
 	image = imutils.resize(image, height = 500)
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
