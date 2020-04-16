@@ -20,6 +20,7 @@ def imgShow(image):
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 	cv2.waitKey(1)
+	# ***** Something isn't working. Will have to Ctrl-d to close Python to get the window to close. *****
 
 #Reads text from image to be stored in a string
 def imgToText(image):
