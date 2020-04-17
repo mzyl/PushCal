@@ -27,3 +27,7 @@ def imgShow(image):
 #Reads text from image to be stored in a string
 def imgToText(image):
 	return pytesseract.image_to_string(image)
+
+def splitImage(image, c1, c2):
+	c1 = image[0:, 0:int(image.shape[1]/2)]
+	c2 = image[0:, int(image.shape[1]/2):]
