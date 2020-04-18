@@ -23,6 +23,11 @@ def toText(image):
 def write(image):
 	cv2.imwrite("modified.jpg", image)
 
-def splitImage(image, c1, c2):
-	c1 = image[0:, 0:int(image.shape[1]/2)]
-	c2 = image[0:, int(image.shape[1]/2):]
+#Makes a separate image for the days to be read from
+def splitDays(image):
+	return image[0:, 0:int(image.shape[1]/2)]
+
+#Makes a separate image for the times to be read from
+def splitTimes(image):
+	return image[0:, int(image.shape[1]/2:]
+
