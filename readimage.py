@@ -7,8 +7,7 @@ def pathToImage(path):
 	return cv2.imread(path)
 
 #Creates an edged image for easier OCR
-#Actually seems to work MUCH better without edged
-#Resizing is also a factor and produces different results
+#Not actually great for OCR, but may be useful later
 def toEdged(image):
 	image = imutils.resize(image, height = 500)
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -29,5 +28,5 @@ def splitDays(image):
 
 #Makes a separate image for the times to be read from
 def splitTimes(image):
-	return image[0:, int(image.shape[1]/2:]
+	return image[0:, int(image.shape[1]/2):]
 
