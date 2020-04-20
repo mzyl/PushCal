@@ -3,6 +3,28 @@ import cv2
 import imutils
 import pytesseract
 
+class Image():
+
+	#Read image file
+	def __init__(self, path):
+		self.image = cv2.imread(path)
+
+	#Pull text from image
+	def read(self):
+		return pytesseract.image_to_string(self.image)
+	
+	#Grayscale
+	def gray(self):
+		self.image = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+
+	#Resize image
+	def resize(self, height):
+		self.image = imutils.resize(self.image, height = height)
+	
+	#Write image to file
+	def write(self, filename = "modified.jpg"):
+		cv2.imwrite(filename, self.image)
+
 #Read image file
 def pathToImage(path):
 	return cv2.imread(path)
@@ -41,6 +63,8 @@ def toText(image):
 def write(image):
 	cv2.imwrite("modified.jpg", image)
 
+#Maybe these portions should go in a different file? They don't strictly pertain to reading the file, they pertain to formatting the image for a specific usecase.
+#Should go in main?
 #Makes a separate image for the days to be read from
 def splitDays(image):
 	return image[0:, 0:int(image.shape[1]/2)]
