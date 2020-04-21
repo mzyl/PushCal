@@ -2,6 +2,8 @@ import cv2
 import imutils
 import pytesseract
 
+#Maybe a subclass should be made to handle image modification?
+
 class Image():
 
 	#Read image file
