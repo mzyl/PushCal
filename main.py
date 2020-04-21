@@ -8,10 +8,11 @@ def splitDays(image):
 
 #Return separate image containing the space of times
 def splitTimes(image):
-	return image[0:, int(image.shape[1]/2:]
+	return image[0:, int(image.shape[1]/2):]
 
 #notes for tesseract
 #config = r'--oem 3 --psm *'
 #pytesseract.image_to_string(x, config=config)
 #psm 3 (default) works best for Days
 #psm 12 works best for Times
+
