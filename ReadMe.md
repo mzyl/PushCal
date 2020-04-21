@@ -5,3 +5,4 @@ Very early stages.
 openCV #pip install opencv-python==4.1.2.30
 Pillow
 pytesseract
+Flask
