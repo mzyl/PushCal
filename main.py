@@ -2,6 +2,10 @@
 
 import readimage as img
 
+#Called by web app to take image as input and return read data as string
+def output(image):
+	return img.read(img.input(image))
+
 #Return separate image containing the space of days
 def splitDays(image):
 	return image[0:, 0:int(image.shape[1]/2)]
