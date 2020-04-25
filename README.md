@@ -4,6 +4,6 @@ This tool will be used for pushing updates to Google calendar from image of phys
 openCV -- pip install opencv-python==4.1.2.30\
 Pillow\
 pytesseract\
-Flask\
+Flask
 ## Errors and Solutions:
-"tesseract is not installed or it's not in your path" - brew install tesseract\
+"tesseract is not installed or it's not in your path" - brew install tesseract
