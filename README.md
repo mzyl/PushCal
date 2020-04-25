@@ -6,3 +6,5 @@ openCV #pip install opencv-python==4.1.2.30
 Pillow
 pytesseract
 Flask
+#Errors:
+"tesseract is not installed or it's not in your path" - brew install tesseract
