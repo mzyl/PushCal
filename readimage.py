@@ -3,7 +3,7 @@ import imutils
 import pytesseract
 
 #Read image file
-def input(path):
+def image(path):
 	return cv2.imread(path)
 
 #Pull text from image
