@@ -38,8 +38,7 @@ def edged(image):
 def removeNoise(image):
 	return cv2.medianBlur(image, 5)
 
-#Thresholding - Not sure what this does yet -- Errors anyway
+#Thresholding 
 def thresholding(image):
-	return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
-
+	return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
