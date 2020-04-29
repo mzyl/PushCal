@@ -42,3 +42,22 @@ def removeNoise(image):
 def thresholding(image):
 	return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
+#Find contours
+def findContours(image):
+	contours = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+	return imutils.grab_contours(contours)
+
+#Sort contours
+def sortContours(contours):
+	contours = imutils.grab_contours(contours)
+	return sorted(contours, key = cv2.contourArea, reverse = True)[:5]
+
+#Draw contours
+def drawContours(image, contours):
+	for c in contours:
+		peri = cv2.arcLength(c, True)
+		approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+		if len(approx) == 4:
+			print(approx)
+			cv2.drawContours(image, [approx], -1, (0, 255, 0), 3)
+			break
