@@ -44,8 +44,7 @@ def thresholding(image):
 
 #Find contours
 def findContours(image):
-	contours = cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-	return imutils.grab_contours(contours)
+	return cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 #Sort contours
 def sortContours(contours):
@@ -58,6 +57,5 @@ def drawContours(image, contours):
 		peri = cv2.arcLength(c, True)
 		approx = cv2.approxPolyDP(c, 0.02 * peri, True)
 		if len(approx) == 4:
-			print(approx)
 			cv2.drawContours(image, [approx], -1, (0, 255, 0), 3)
-			break
+			#return approx
