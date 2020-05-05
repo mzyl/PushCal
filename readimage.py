@@ -23,6 +23,8 @@ def crop(image, left = None, right = None, top = None, bottom = None):
 def resize(image, height):
 	return imutils.resize(image, height = height)
 
+'''Image modification functions'''
+
 #Grayscale
 def grayscale(image):
 	return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -43,6 +45,8 @@ def removeNoise(image):
 def thresholding(image):
 	return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
+'''Contour/Line mapping functions'''
+
 #Find contours
 def findContours(image):
 	return cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
@@ -54,9 +58,32 @@ def sortContours(contours):
 
 #Draw contours
 def drawContours(image, contours):
+	array = []
 	for c in contours:
 		peri = cv2.arcLength(c, True)
 		approx = cv2.approxPolyDP(c, 0.02 * peri, True)
 		if len(approx) == 4:
 			cv2.drawContours(image, [approx], -1, (0, 255, 0), 3)
-			#return approx
+			array.append(approx)
+	return array
+
+'''Frequent combo functions'''
+
+def prepForContours(image):
+	image = grayscale(image)
+	image = removeNoise(image)
+	return thresholding(image)
+
+def doContours(draw, image):
+	contours = findContours(image)
+	contours = sortContours(contours)
+	return drawContours(draw, contours)
+
+''' To Do:
+Find better way to find boxes.
+	Word boxes to lines idea?
+	Just lines to lines using horizontals?
+Automate cropping from contour points.
+Remove noise from text.
+Begin interacting with Dates Class.
+'''
