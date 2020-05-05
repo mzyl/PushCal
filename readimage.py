@@ -7,15 +7,16 @@ def image(path):
 	return cv2.imread(path)
 
 #Pull text from image
-def read(image):
-	return pytesseract.image_to_string(image)
+def read(image, x = 12):
+	config = r'--oem 3 --psm {}'.format(x)
+	return pytesseract.image_to_string(image, config = config)
 
 #Write image to file
 def write(image, filename = "modified.jpg"):
 	cv2.imwrite(filename, image)
 
 #Crop image to spec
-def crop(image, left = 0, right = 0, top = 0, bottom = 0):
+def crop(image, left = None, right = None, top = None, bottom = None):
 	return image[top:bottom, left:right]
 
 #Resize image
