@@ -38,7 +38,7 @@ def edged(image):
 	return cv2.Canny(image, 75, 200)
 
 #Noise removal
-def removeNoise(image):
+def noise_removal(image):
 	return cv2.medianBlur(image, 5)
 
 #Thresholding 
@@ -48,16 +48,16 @@ def thresholding(image):
 '''Contour/Line mapping functions'''
 
 #Find contours
-def findContours(image):
+def find_contours(image):
 	return cv2.findContours(image, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 #Sort contours
-def sortContours(contours):
+def sort_contours(contours):
 	contours = imutils.grab_contours(contours)
 	return sorted(contours, key = cv2.contourArea, reverse = True)[:5]
 
 #Draw contours
-def drawContours(image, contours):
+def draw_contours(image, contours):
 	array = []
 	for c in contours:
 		peri = cv2.arcLength(c, True)
@@ -69,12 +69,12 @@ def drawContours(image, contours):
 
 '''Frequent combo functions'''
 
-def prepForContours(image):
+def prep_for_contours(image):
 	image = grayscale(image)
 	image = removeNoise(image)
 	return thresholding(image)
 
-def doContours(draw, image):
+def do_contours(draw, image):
 	contours = findContours(image)
 	contours = sortContours(contours)
 	return drawContours(draw, contours)
