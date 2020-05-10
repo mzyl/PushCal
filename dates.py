@@ -1,6 +1,6 @@
 class Date():
 	
-	def __init__(day = None, startTime = None, breakTime = None, endTime = None):
+	def __init__(self, day = None, startTime = None, breakTime = None, endTime = None):
 		self.day = day
 		self.startTime = startTime
 		self.breakTime = breakTime
@@ -9,16 +9,16 @@ class Date():
 	'''
 	Accessors:
 	'''
-	def getDay():
+	def getDay(self):
 		return self.day
 	
-	def getStartTime():
+	def getStartTime(self):
 		return self.startTime
 	
-	def getBreakTime():
+	def getBreakTime(self):
 		return self.breakTime
 	
-	def getEndTime():
+	def getEndTime(self):
 		return self.endTime
 
 
