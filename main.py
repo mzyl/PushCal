@@ -1,18 +1,25 @@
 #Main will glue the pieces together when finished. 
 
 import readimage as img
+import dates
 
 #Called by web app to take image as input and return read data as string
 def output(image):
 	return img.read(img.input(image))
 
-#Return separate image containing the space of days
-def splitDays(image):
-	return image[0:, 0:int(image.shape[1]/2)]
+days = {}
 
-#Return separate image containing the space of times
-def splitTimes(image):
-	return image[0:, int(image.shape[1]/2):]
+def gen_class(image):
+	crop_size = int(image.shape[0]/7)
+	top = 0
+	bottom = crop_size
+	for i in range(7):
+		cropped = img.crop(image, top = top, bottom = bottom)
+		text = img.read(cropped).split()
+		#Use text to generate new class instance here
+		print(text)
+		top = bottom
+		bottom = bottom + crop_size
 
 #notes for tesseract
 #config = r'--oem 3 --psm *'
