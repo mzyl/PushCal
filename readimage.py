@@ -1,6 +1,7 @@
 import cv2
 import imutils
 import pytesseract
+import numpy as np
 
 #Read image file
 def image(path):
@@ -45,6 +46,14 @@ def noise_removal(image):
 def thresholding(image):
 	return cv2.adaptiveThreshold(image, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
 
+#Transform perspective
+#***** Very static setup, needs to be dynamic *****# 
+def transform(image, points):
+	pts1 = np.float32([[points.item(0)+20,points.item(1)-20],[points.item(2)+20,points.item(3)+20],[points.item(4)-20,points.item(5)+20],[points.item(6)-20,points.item(7)-20]])
+	pts2 = np.float32([[2500,0],[2500,4000],[0,4000],[0,0]])
+	M = cv2.getPerspectiveTransform(pts1, pts2)
+	return cv2.warpPerspective(image, M, (2510,4000))
+
 '''Contour/Line mapping functions'''
 
 #Find contours
@@ -67,6 +76,19 @@ def draw_contours(image, contours):
 			array.append(approx)
 	return array
 
+#Find lines
+def find_lines(image, min_length = 100, max_gap = 10, threshold = 15):
+	return cv2.HoughLinesP(image, 1, np.pi/180, threshold, min_length, max_gap)
+
+#Draw lines
+def draw_lines(image, lines):
+	array = []
+	for line in lines:
+		x1,y1,x2,y2 = line[0]
+		cv2.line(image, (x1,y1), (x2,y2), (0,255,0), 2)
+		array.append(line[0])
+	return array
+
 '''Frequent combo functions'''
 
 def prep_for_contours(image):
@@ -78,6 +100,7 @@ def do_contours(draw, image):
 	contours = findContours(image)
 	contours = sortContours(contours)
 	return drawContours(draw, contours)
+
 
 ''' To Do:
 Find better way to find boxes.
