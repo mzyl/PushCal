@@ -49,6 +49,7 @@ def thresholding(image):
 #Transform perspective
 #***** Very static setup, needs to be dynamic *****# 
 def transform(image, points):
+	#Points with padding for drawing contours
 	#pts1 = np.float32([[points.item(0)+20,points.item(1)-20],[points.item(2)+20,points.item(3)+20],[points.item(4)-20,points.item(5)+20],[points.item(6)-20,points.item(7)-20]])
 	pts1 = np.float32([[points.item(0),points.item(1)],[points.item(2),points.item(3)],[points.item(4),points.item(5)],[points.item(6),points.item(7)]])
 	pts2 = np.float32([[2500,0],[2500,4000],[0,4000],[0,0]])
@@ -87,22 +88,15 @@ def draw_contours(image, contours):
 
 '''Frequent combo functions'''
 
+#Returns edged image from input image, ready to find calendar outline
 def prep_for_contours(image):
 	image = grayscale(image)
 	image = noise_removal(image)
 	return edged(image)
 
+#Use contours to return calendar outline
 def do_contours(image):
 	contours = find_contours(image)
 	contours = sort_contours(contours)
 	return get_outline(contours)
 
-
-''' To Do:
-Find better way to find boxes.
-	Word boxes to lines idea?
-	Just lines to lines using horizontals?
-Automate cropping from contour points.
-Remove noise from text.
-Begin interacting with Dates Class.
-'''
