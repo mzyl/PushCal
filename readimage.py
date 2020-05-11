@@ -49,7 +49,8 @@ def thresholding(image):
 #Transform perspective
 #***** Very static setup, needs to be dynamic *****# 
 def transform(image, points):
-	pts1 = np.float32([[points.item(0)+20,points.item(1)-20],[points.item(2)+20,points.item(3)+20],[points.item(4)-20,points.item(5)+20],[points.item(6)-20,points.item(7)-20]])
+	#pts1 = np.float32([[points.item(0)+20,points.item(1)-20],[points.item(2)+20,points.item(3)+20],[points.item(4)-20,points.item(5)+20],[points.item(6)-20,points.item(7)-20]])
+	pts1 = np.float32([[points.item(0),points.item(1)],[points.item(2),points.item(3)],[points.item(4),points.item(5)],[points.item(6),points.item(7)]])
 	pts2 = np.float32([[2500,0],[2500,4000],[0,4000],[0,0]])
 	M = cv2.getPerspectiveTransform(pts1, pts2)
 	return cv2.warpPerspective(image, M, (2510,4000))
@@ -65,6 +66,14 @@ def sort_contours(contours):
 	contours = imutils.grab_contours(contours)
 	return sorted(contours, key = cv2.contourArea, reverse = True)[:5]
 
+#Get outline of calendar via contours without drawing
+def get_outline(contours):
+	for c in contours:
+		peri = cv2.arcLength(c, True)
+		approx = cv2.approxPolyDP(c, 0.02 * peri, True)
+		if len(approx) == 4:
+			return approx
+
 #Draw contours
 def draw_contours(image, contours):
 	array = []
@@ -76,30 +85,17 @@ def draw_contours(image, contours):
 			array.append(approx)
 	return array
 
-#Find lines
-def find_lines(image, min_length = 100, max_gap = 10, threshold = 15):
-	return cv2.HoughLinesP(image, 1, np.pi/180, threshold, min_length, max_gap)
-
-#Draw lines
-def draw_lines(image, lines):
-	array = []
-	for line in lines:
-		x1,y1,x2,y2 = line[0]
-		cv2.line(image, (x1,y1), (x2,y2), (0,255,0), 2)
-		array.append(line[0])
-	return array
-
 '''Frequent combo functions'''
 
 def prep_for_contours(image):
 	image = grayscale(image)
-	image = removeNoise(image)
-	return thresholding(image)
+	image = noise_removal(image)
+	return edged(image)
 
-def do_contours(draw, image):
-	contours = findContours(image)
-	contours = sortContours(contours)
-	return drawContours(draw, contours)
+def do_contours(image):
+	contours = find_contours(image)
+	contours = sort_contours(contours)
+	return get_outline(contours)
 
 
 ''' To Do:
