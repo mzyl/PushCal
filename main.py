@@ -7,6 +7,7 @@ import dates
 def output(image):
 	return img.read(img.input(image))
 
+#Transform image based on calendar outline for ease of splitting information into individual days
 def transform_image(image):
 	copy = image.copy()
 	image = img.prep_for_contours(image)
@@ -14,8 +15,10 @@ def transform_image(image):
 	print(contours)
 	return img.transform(copy, contours)
 
+#Generates an array of Date objects to hold the upcoming Date instances
 days = [dates.Date() for i in range(7)]
 
+#Crops calendar into individual days and populates Date instances with the information
 def gen_class(image):
 	crop_size = int(image.shape[0]/7)
 	top = 0
@@ -36,3 +39,10 @@ def main(image):
 	for i in range(len(days)):
 		print(days[i].toString())
 
+''' To Do:
+Make img.transform points more dynamic
+Find a way to test for proper time assignment in Dates Class i.e. "Start Time" != "Saturday"
+	Maybe reformat times to be integers, then test if: "type(text[i+1]) == int"
+		May need times to be integers to interface with Google Calendar anyway?
+Begin interfacing with Google Calendar
+'''
