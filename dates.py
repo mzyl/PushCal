@@ -1,9 +1,11 @@
 class Date():
-	
-	def __init__(self, day = None, startTime = None, breakTime = None, endTime = None):
+
+	def __init__(self, day = None, startTime = None, startTimeFinish = None, breakTime = None, endTimeBegin = None, endTime = None):
 		self.day = day
 		self.startTime = startTime
+		self.startTimeFinish = startTimeFinish
 		self.breakTime = breakTime
+		self.endTimeBegin = endTimeBegin
 		self.endTime = endTime
 	
 	#Assigns day attribute using day found in text generated from image
@@ -11,6 +13,7 @@ class Date():
 		for i in text:
 			if i == 'Sunday' or i == 'Monday' or i == 'Tuesday' or i == 'Wednesday' or i == 'Thursday' or i == 'Friday' or i == 'Saturday':
 				self.day = i
+				break
 	
 	#Assigns each time attribute based on preceeding indicator found in text generated from image
 	def assignTime(self, text):
@@ -19,9 +22,16 @@ class Date():
 				self.startTime = text[i+1]
 			elif text[i] == 'Break:' or text[i] == 'Break':
 				self.breakTime = text[i+1]
-			elif (text[i] == 'End:' or text[i] == 'End'):
-				print(text[i])
+			elif (text[-1] != 'End:' and text[-1] != 'End') and (text[i] == 'End:' or text[i] == 'End'):
 				self.endTime = text[i+1]
+	
+	#Computes and assigns Start and End time blocks
+	def assignBlock(self):
+		try:
+			self.endTimeBegin = int(self.breakTime[0]) + 1
+			self.startTimeFinish = self.breakTime
+		except:
+			pass
 	
 
 	'''
@@ -55,6 +65,23 @@ class Date():
 	def setEndTime(time):
 		self.endTime = time
 
+	#Resets wrongly assigned times to 'None'
+	def clean(self):
+		try:
+			int(self.startTime[0])
+		except:
+			self.startTime = None
+
+		try:
+			int(self.breakTime[0])
+		except:
+			self.breakTime = None
+
+		try:
+			int(self.endTime[0])
+		except:
+			self.endTime = None
+	
 
 	'''
 	Testing:
@@ -62,5 +89,7 @@ class Date():
 	def toString(self):
 		print("Day: ", self.day)
 		print("Start Time: ", self.startTime)
+		print("Start Time Finish: ", self.startTimeFinish)
 		print("Break Time: ", self.breakTime)
+		print("End Time Begin: ", self.endTimeBegin)
 		print("End Time: ", self.endTime)
