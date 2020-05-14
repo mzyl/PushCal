@@ -28,11 +28,15 @@ def gen_class(image):
 		text = img.read(cropped).split()
 		days[i].assignDay(text)
 		days[i].assignTime(text)
+		days[i].clean()
+		days[i].assignBlock()
 		#print(days[i].toString())
 		top = bottom
 		bottom = bottom + crop_size
 
-def main(image):
+#def main(image):
+def main():
+	image = img.image('desie.jpg') #Remove after testing
 	image = transform_image(image)
 	img.write(image)
 	gen_class(image)
@@ -41,8 +45,6 @@ def main(image):
 
 ''' To Do:
 Make img.transform points more dynamic
-Find a way to test for proper time assignment in Dates Class i.e. "Start Time" != "Saturday"
-	Maybe reformat times to be integers, then test if: "type(text[i+1]) == int"
-		May need times to be integers to interface with Google Calendar anyway?
+Compute "End Time Begin" properly
 Begin interfacing with Google Calendar
 '''
