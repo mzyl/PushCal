@@ -1,10 +1,9 @@
 class Date():
 
-	def __init__(self, day = None, startTime = None, startTimeFinish = None, breakTime = None, endTimeBegin = None, endTime = None):
+	def __init__(self, day = None, startTime = None, startTimeFinish = None, endTimeBegin = None, endTime = None):
 		self.day = day
 		self.startTime = startTime
 		self.startTimeFinish = startTimeFinish
-		self.breakTime = breakTime
 		self.endTimeBegin = endTimeBegin
 		self.endTime = endTime
 	
@@ -21,7 +20,7 @@ class Date():
 			if text[i] == 'Start:' or text[i] == 'Start':
 				self.startTime = text[i+1]
 			elif text[i] == 'Break:' or text[i] == 'Break':
-				self.breakTime = text[i+1]
+				self.startTimeFinish = text[i+1]
 			elif (text[-1] != 'End:' and text[-1] != 'End') and (text[i] == 'End:' or text[i] == 'End'):
 				self.endTime = text[i+1]
 	
@@ -29,7 +28,6 @@ class Date():
 	def assignBlock(self):
 		try:
 			self.endTimeBegin = int(self.breakTime[0]) + 1
-			self.startTimeFinish = self.breakTime
 		except:
 			pass
 	
@@ -43,8 +41,11 @@ class Date():
 	def getStartTime(self):
 		return self.startTime
 	
-	def getBreakTime(self):
-		return self.breakTime
+	def getStartTimeFinish(self):
+		return self.startTimeFinish
+	
+	def getEndTimeBegin(self):
+		return self.endTimeBegin
 	
 	def getEndTime(self):
 		return self.endTime
@@ -59,9 +60,12 @@ class Date():
 	def setStartTime(time):
 		self.startTime = time
 	
-	def setBreakTime(time):
-		self.breakTime = time
+	def setStartTimeFinish(time):
+		self.startTimeFinish = time
 	
+	def setEndTimeBegin(time):
+		self.endTimeBegin = time
+
 	def setEndTime(time):
 		self.endTime = time
 
@@ -89,7 +93,6 @@ class Date():
 	def toString(self):
 		print("Day: ", self.day)
 		print("Start Time: ", self.startTime)
-		print("Start Time Finish: ", self.startTimeFinish)
-		print("Break Time: ", self.breakTime)
+		print("Break Time: ", self.startTimeFinish)
 		print("End Time Begin: ", self.endTimeBegin)
 		print("End Time: ", self.endTime)
