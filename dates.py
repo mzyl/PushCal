@@ -27,7 +27,7 @@ class Date():
 	#Computes and assigns Start and End time blocks
 	def assignBlock(self):
 		try:
-			self.endTimeBegin = int(self.breakTime[0]) + 1
+			self.endTimeBegin = int(self.startTimeFinish[0]) + 1
 		except:
 			pass
 	
@@ -77,9 +77,14 @@ class Date():
 			self.startTime = None
 
 		try:
-			int(self.breakTime[0])
+			int(self.startTimeFinish[0])
 		except:
-			self.breakTime = None
+			self.startTimeFinish = None
+
+		try:
+			int(self.endTimeBegin[0])
+		except:
+			self.endTimeBegin = None
 
 		try:
 			int(self.endTime[0])
@@ -96,3 +101,4 @@ class Date():
 		print("Break Time: ", self.startTimeFinish)
 		print("End Time Begin: ", self.endTimeBegin)
 		print("End Time: ", self.endTime)
+
