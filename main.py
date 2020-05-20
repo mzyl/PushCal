@@ -29,7 +29,7 @@ def gen_class(image):
 		days[i].assignDay(text)
 		days[i].assignTime(text)
 		days[i].clean()
-		days[i].assignBlock()
+		#days[i].assignBlock()
 		#print(days[i].toString())
 		top = bottom
 		bottom = bottom + crop_size
