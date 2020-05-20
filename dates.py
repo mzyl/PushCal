@@ -1,3 +1,5 @@
+import timeformat
+
 class Date():
 
 	def __init__(self, day = None, startTime = None, startTimeFinish = None, endTimeBegin = None, endTime = None):
@@ -18,11 +20,11 @@ class Date():
 	def assignTime(self, text):
 		for i in range(len(text)):
 			if text[i] == 'Start:' or text[i] == 'Start':
-				self.startTime = text[i+1]
+				self.startTime = timeformat.format(text[i+1])
 			elif text[i] == 'Break:' or text[i] == 'Break':
-				self.startTimeFinish = text[i+1]
+				self.startTimeFinish = timeformat.format(text[i+1])
 			elif (text[-1] != 'End:' and text[-1] != 'End') and (text[i] == 'End:' or text[i] == 'End'):
-				self.endTime = text[i+1]
+				self.endTime = timeformat.format(text[i+1])
 	
 	#Computes and assigns Start and End time blocks
 	def assignBlock(self):
@@ -68,7 +70,7 @@ class Date():
 
 	def setEndTime(time):
 		self.endTime = time
-
+	
 	#Resets wrongly assigned times to 'None'
 	def clean(self):
 		try:
