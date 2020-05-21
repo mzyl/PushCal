@@ -7,6 +7,8 @@ def format(time):
 				list.append(i)
 			list.insert(0, '0')
 			return ret.join(list)
+
+		else: raise
+
 	except:
-		print('nope')
 		return time
