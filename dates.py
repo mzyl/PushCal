@@ -29,7 +29,7 @@ class Date():
 	#Computes and assigns Start and End time blocks
 	def assignBlock(self):
 		try:
-			self.endTimeBegin = int(self.startTimeFinish[0]) + 1
+			self.endTimeBegin = timeformat.calc_end_time_begin(self.startTimeFinish)
 		except:
 			pass
 	
