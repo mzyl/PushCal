@@ -45,6 +45,5 @@ def main():
 
 ''' To Do:
 Make img.transform points more dynamic
-Compute "End Time Begin" properly
 Begin interfacing with Google Calendar
 '''
