@@ -1,3 +1,4 @@
+#Adds '0' at beginning of time if needed
 def format(time):
 	try:
 		if time[1] == ':':
@@ -12,6 +13,7 @@ def format(time):
 	except:
 		return time
 
+#Calculates the endTimeBegin attribute based on startTimeFinish as input
 def calc_end_time_begin(time):
 	list = []
 	ret = ''
