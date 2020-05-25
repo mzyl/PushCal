@@ -18,6 +18,13 @@ def format(time):
 	list.extend(':' + '0' + '0')
 	return ret.join(list)
 
+#Convert to 24 hour format
+def tfh_format(time):
+	list = []
+	ret = ''
+
+	
+
 #Calculates the endTimeBegin attribute based on startTimeFinish as input
 def calc_end_time_begin(time):
 	list = []
