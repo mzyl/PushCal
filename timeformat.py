@@ -8,16 +8,15 @@ def format(time):
 			for i in time:
 				list.append(i)
 			list.insert(0, '0')
-			list.extend(':' + '0' + '0')
-			return ret.join(list)
 
 		else: raise
 
 	except:
 		for i in time:
 			list.append(i)
-		list.extend(':' + '0' + '0')
-		return ret.join(list)
+
+	list.extend(':' + '0' + '0')
+	return ret.join(list)
 
 #Calculates the endTimeBegin attribute based on startTimeFinish as input
 def calc_end_time_begin(time):
