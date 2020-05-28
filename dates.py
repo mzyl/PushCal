@@ -2,12 +2,13 @@ import timeformat
 
 class Date():
 
-	def __init__(self, day = None, startTime = None, startTimeFinish = None, endTimeBegin = None, endTime = None):
+	def __init__(self, day = None, startTime = None, startTimeFinish = None, endTimeBegin = None, endTime = None, meridiem = None):
 		self.day = day
 		self.startTime = startTime
 		self.startTimeFinish = startTimeFinish
 		self.endTimeBegin = endTimeBegin
 		self.endTime = endTime
+		self.meridiem = meridiem
 	
 	#Assigns day attribute using day found in text generated from image
 	def assignDay(self, text):
