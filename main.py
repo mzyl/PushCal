@@ -36,7 +36,7 @@ def gen_class(image):
 
 #def main(image):
 def main():
-	image = img.image('desie.jpg') #Remove after testing
+	image = img.image('imgzoom.jpg') #Remove after testing
 	image = transform_image(image)
 	img.write(image)
 	gen_class(image)

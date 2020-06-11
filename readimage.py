@@ -52,7 +52,8 @@ def transform(image, points):
 	#Points with padding for drawing contours
 	#pts1 = np.float32([[points.item(0)+20,points.item(1)-20],[points.item(2)+20,points.item(3)+20],[points.item(4)-20,points.item(5)+20],[points.item(6)-20,points.item(7)-20]])
 	pts1 = np.float32([[points.item(0),points.item(1)],[points.item(2),points.item(3)],[points.item(4),points.item(5)],[points.item(6),points.item(7)]])
-	pts2 = np.float32([[2500,0],[2500,4000],[0,4000],[0,0]])
+	#pts2 = np.float32([[2500,0],[2500,4000],[0,4000],[0,0]])
+	pts2 = np.float32([[0,0],[0,4000],[2500,4000],[2500,0]])
 	M = cv2.getPerspectiveTransform(pts1, pts2)
 	return cv2.warpPerspective(image, M, (2510,4000))
 
