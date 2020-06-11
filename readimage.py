@@ -56,7 +56,6 @@ def point_eval(point):
         return 4000
 
 #Transform perspective
-#***** Very static setup, needs to be dynamic *****# 
 #**    Is more dynamic, but feels a bit crude
 def transform(image, points):
     #Points with padding for drawing contours
