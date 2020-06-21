@@ -36,7 +36,7 @@ def gen_class(image):
 
 #def main(image):
 def main():
-    image = img.image('imgzoom.jpg') #Remove after testing
+    image = img.image('img.JPG') #Remove after testing
     image = transform_image(image)
     img.write(image)
     gen_class(image)
@@ -44,6 +44,5 @@ def main():
         print(days[i].toString())
 
 ''' To Do:
-Make img.transform points more dynamic
 Begin interfacing with Google Calendar
 '''
