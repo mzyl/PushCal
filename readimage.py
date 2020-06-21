@@ -8,6 +8,7 @@ def image(path):
     return cv2.imread(path)
 
 #Pull text from image
+#12 and 6 seem to work well
 def read(image, x = 12):
     config = r'--oem 3 --psm {}'.format(x)
     return pytesseract.image_to_string(image, config = config)
